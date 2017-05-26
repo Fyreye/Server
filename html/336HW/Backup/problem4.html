@@ -1,0 +1,67 @@
+
+<!--  Example using a uniform variable to shift the location
+of the geometry in the vertex shader. Same as GL_example1b but draws
+two squares, one shifted left and one shifted right. -->		
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Shader Source In &lt;script&gt; Tags</title>
+</head>
+
+<body> 
+	<canvas id="theCanvas" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+
+
+<script id="vertexShaderSolid" type="x-shader/x-vertex">
+uniform float shift;
+attribute vec4 a_Position;
+void main() 
+{
+  float x = a_Position.x + shift;
+  gl_Position = vec4(x, a_Position.yzw);
+}
+</script>
+
+<script id="fragmentShaderSolid" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec4 colorVar;
+void main() 
+{
+  gl_FragColor = colorVar;
+}
+</script>
+
+<script id="vertexShaderSpecular" type="x-shader/x-vertex">
+attribute vec4 a_Position;
+attribute vec4 a_Color;
+varying vec4 color;
+void main() 
+{
+  color = a_Color;
+  gl_Position = a_Position;
+}
+</script>
+
+<script id="fragmentShaderSpecular" type="x-shader/x-fragment">
+// In a webgl fragment shader, float precision has to be specified before
+// any other variable declarations (in this case, "medium" precision)
+precision mediump float;
+varying vec4 color;
+void main() 
+{
+  gl_FragColor = color;
+}
+</script>
+
+
+		<script src="/336HW/teal_book/webgl-utils.js"></script>
+		<script src="/336HW/teal_book/webgl-debug.js"></script>
+		<script src="/336HW/teal_book/cuon-utils.js"></script>
+		<script src="problem4.js"></script>
+		<script>window.onload = main</script>
+</body>
+</html>

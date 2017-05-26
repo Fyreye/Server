@@ -1,0 +1,45 @@
+		
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Transforming Vertices</title>
+</head>
+
+<body> 
+	<canvas id="theCanvas" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+
+	<input id="scaleBox" type="text" value="1.0" size=4/>
+
+<script id="vertexShader" type="x-shader/x-vertex">
+uniform float shiftX; //Shift vars
+uniform float shiftY; 
+uniform float scalar;
+attribute vec4 a_Position;
+void main() 
+{
+  // adjust the x and y coordinates by the shift
+  float x = shiftX + (a_Position.x*scalar);
+  float y = shiftY + (a_Position.y*scalar);
+  gl_Position = vec4(x, y, 0.0, 1.0);
+}
+</script>
+
+<script id="fragmentShader" type="x-shader/x-fragment">
+void main() 
+{
+  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+}
+</script>
+
+
+		<script src="/336HW/teal_book/webgl-utils.js"></script>
+		<script src="/336HW/teal_book/webgl-debug.js"></script>
+		<script src="/336HW/teal_book/cuon-utils.js"></script>
+		<script src="GL_example3.js"></script>
+		<script>window.onload = main</script>
+</body>
+</html>

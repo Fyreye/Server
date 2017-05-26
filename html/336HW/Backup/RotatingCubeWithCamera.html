@@ -1,0 +1,65 @@
+<!--  Demo of using a transformation matrix in a vertex shader. -->		
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Transformations</title>
+</head>
+
+<body> 
+	<canvas id="theCanvas" width="600" height="400"  tabindex="0">
+    Please use a browser that supports "canvas"
+    </canvas>
+
+<p>
+Keyboard controls:
+<ul style="list-style:none;">
+<li>w, a, s, d - move forward, left, back, right
+<li>W, S - zoom in, zoom out (change field of view)
+<li>r, f - move up, down
+<li>i, j, k, l - look up, turn left, look down, turn right
+<li>O - look at origin
+<li>I, J, K, L - orbit up, left, down, right
+<p>
+<li>Rotation of cube:
+<li>SPACE - pause rotation
+<li>y - rotate about y axis
+<li>x - rotate about x axis
+<li>z - rotate about z axis
+<li>o - Reset to initial state
+<li>
+</ul>
+<script id="vertexShader" type="x-shader/x-vertex">
+uniform mat4 transform;
+attribute vec4 a_Position;
+attribute vec4 a_Color;
+varying vec4 color;
+void main() 
+{
+  color = a_Color;
+  gl_Position = transform * a_Position;
+}
+</script>
+
+<script id="fragmentShader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 color;
+void main() 
+{
+  gl_FragColor = color;
+}
+</script>
+
+
+		<script src="./teal_book/webgl-utils.js"></script>
+		<script src="./teal_book/webgl-debug.js"></script>
+		<script src="./teal_book/cuon-utils.js"></script>
+		<script src="./teal_book/cuon-matrix.js"></script>
+		<script src="CS336Object.js"></script>
+		<script src="Camera.js"></script>
+		
+		<script src="RotatingCubeWithCamera.js"></script>
+		<script>window.onload = main</script>
+</body>
+</html>
